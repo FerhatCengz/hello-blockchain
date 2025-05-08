@@ -1,4 +1,4 @@
-// read.js
+// delete.js
 const Web3 = require("web3").default;
 const { abi } = require("./build/HelloWorldSimple.json");
 
@@ -9,10 +9,10 @@ const web3     = new Web3(RPC_URL);
 const contract = new web3.eth.Contract(abi, CONTRACT_ADDRESS);
 
 (async () => {
-  try {
-    const current = await contract.methods.message().call();
-    console.log("📖 Okunan mesaj:", current || "<boş>");
-  } catch (err) {
-    console.error("❌ Okuma hatası:", err.message || err);
-  }
+  const [user] = await web3.eth.getAccounts();
+  await contract.methods
+    .deleteMessage()
+    .send({ from: user, gas: 3000000, gasPrice: await web3.eth.getGasPrice() });
+
+  console.log("🗑️ Mesaj silindi.");
 })();
