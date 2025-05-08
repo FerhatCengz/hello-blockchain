@@ -2,10 +2,10 @@
 const Web3 = require("web3").default;
 
 // Derlenmiş akıllı kontratın ABI (arayüz tanımı) ve bytecode'unu build klasöründen al
-const { abi, bytecode } = require("./build/HelloWorldSimple.json");
+const { abi, bytecode } = require("./build/PersonnelManager.json");
 
 // Web3 nesnesini, yerel blockchain node'una (örneğin Ganache) bağla
-const web3 = new Web3("http://127.0.0.1:7545");
+const web3 = new Web3("http://127.0.0.1:8545");
 
 (async () => {
   // Kullanılabilir hesapları al ve ilk hesabı deployer olarak kullan
