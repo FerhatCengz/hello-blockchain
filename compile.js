@@ -4,13 +4,13 @@ const fs   = require("fs-extra");
 const solc = require("solc");
 
 const source = fs.readFileSync(
-  path.resolve("contracts", "HelloWorldSimple.sol"),
+  path.resolve("contracts", "PersonnelManager.sol"),
   "utf8"
 );
 
 const input = {
   language: "Solidity",
-  sources: { "HelloWorldSimple.sol": { content: source } },
+  sources: { "PersonnelManager.sol": { content: source } },
   settings: {
     evmVersion: "london",                  // ← burası eklendi
     outputSelection: {
@@ -20,11 +20,11 @@ const input = {
 };
 
 const output = JSON.parse(solc.compile(JSON.stringify(input)));
-const info   = output.contracts["HelloWorldSimple.sol"].HelloWorldSimple;
+const info   = output.contracts["PersonnelManager.sol"].PersonnelManager;
 
-fs.outputJSONSync("build/HelloWorldSimple.json", {
+fs.outputJSONSync("build/PersonnelManager.json", {
   abi:      info.abi,
   bytecode: info.evm.bytecode.object
 });
 
-console.log("Compile tamamlandı: build/HelloWorldSimple.json");
+console.log("Compile tamamlandı: build/PersonnelManager.json");
